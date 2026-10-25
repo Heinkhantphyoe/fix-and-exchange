@@ -1,0 +1,2 @@
+<?php
+// Show reported listings.

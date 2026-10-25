@@ -1,0 +1,2 @@
+<?php
+// Manage student accounts.
