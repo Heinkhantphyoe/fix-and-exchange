@@ -1,1 +1,223 @@
-/* Styles for repair volunteer pages. */
+/* Repair volunteer application. */
+.volunteer-application-page {
+    padding: 36px 16px 56px;
+}
+
+.volunteer-application-container {
+    max-width: 1080px;
+}
+
+.volunteer-application-hero,
+.volunteer-application-card,
+.volunteer-application-status {
+    background: #ffffff;
+    border: 1px solid #b5c7bb;
+    box-shadow: 0 8px 22px rgba(31, 42, 36, 0.06);
+}
+
+.volunteer-application-back-link {
+    margin-bottom: 16px;
+}
+
+.volunteer-application-back-link .btn i {
+    margin-right: 5px;
+}
+
+.volunteer-application-hero {
+    padding: 28px 38px 30px;
+}
+
+.volunteer-application-kicker {
+    margin-bottom: 4px;
+    color: #123c2a;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.volunteer-application-kicker i {
+    margin-right: 6px;
+}
+
+.volunteer-application-hero h1 {
+    margin-bottom: 6px;
+    color: #123c2a;
+    font-size: 26px;
+}
+
+.volunteer-application-hero p {
+    max-width: 760px;
+    margin-bottom: 16px;
+    color: #34483d;
+    line-height: 1.45;
+}
+
+.volunteer-application-stats {
+    display: inline-flex;
+    flex-wrap: wrap;
+    border: 1px solid #6d7e73;
+    border-radius: 7px;
+}
+
+.volunteer-application-stats > div {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 170px;
+    padding: 9px 16px;
+}
+
+.volunteer-application-stats > div + div {
+    border-left: 1px solid #d6e3da;
+}
+
+.volunteer-application-stats i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: #123c2a;
+    border: 1px solid #718077;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+.volunteer-application-stats strong,
+.volunteer-application-stats small {
+    display: block;
+    line-height: 1.25;
+}
+
+.volunteer-application-stats strong {
+    color: #123c2a;
+    font-size: 13px;
+}
+
+.volunteer-application-stats small {
+    color: #5d6b63;
+    font-size: 12px;
+}
+
+.volunteer-application-page > .container > .alert,
+.volunteer-application-status,
+.volunteer-application-card {
+    margin-top: 28px;
+}
+
+.volunteer-application-card {
+    padding: 28px 38px 30px;
+}
+
+.volunteer-application-card h2,
+.volunteer-application-status h2 {
+    margin-bottom: 18px;
+    color: #123c2a;
+    font-size: 20px;
+}
+
+.volunteer-application-fields {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: 42px 78px;
+}
+
+.volunteer-application-fields .form-group {
+    margin-bottom: 20px;
+}
+
+.volunteer-application-fields .form-control {
+    border-color: #8fa198;
+    border-radius: 2px;
+    box-shadow: none;
+}
+
+.volunteer-application-fields .form-control[readonly] {
+    color: #27372e;
+    background: #ffffff;
+}
+
+.volunteer-skills-input {
+    min-height: 152px;
+}
+
+.volunteer-application-inline-fields {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 8px;
+}
+
+.volunteer-safety-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 4px;
+    padding: 14px 12px;
+    color: #27372e;
+    border: 1px solid #b5c7bb;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.volunteer-safety-check .form-check-input {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+}
+
+.volunteer-application-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.volunteer-application-actions .btn {
+    min-width: 146px;
+}
+
+.volunteer-application-status {
+    padding: 26px 32px;
+}
+
+.volunteer-application-status p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 700px) {
+    .volunteer-application-page {
+        padding: 20px 12px 40px;
+    }
+
+    .volunteer-application-hero,
+    .volunteer-application-card {
+        padding: 24px 20px;
+    }
+
+    .volunteer-application-fields {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .volunteer-application-inline-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .volunteer-application-stats {
+        display: flex;
+        width: 100%;
+    }
+
+    .volunteer-application-stats > div {
+        flex: 1 1 100%;
+    }
+
+    .volunteer-application-stats > div + div {
+        border-top: 1px solid #d6e3da;
+        border-left: 0;
+    }
+
+    .volunteer-application-actions .btn {
+        width: 100%;
+    }
+}

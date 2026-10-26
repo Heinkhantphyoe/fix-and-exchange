@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $password === '') {
         $error = 'Please enter your email address and password.';
     } else {
-        $statement = mysqli_prepare($conn, 'SELECT user_id, full_name, email, password_hash, role, account_status, tp_number FROM users WHERE email = ? LIMIT 1');
+        $statement = mysqli_prepare($conn, 'SELECT user_id, full_name, email, password_hash, role, account_status, tp_number, intake_code, academic_program FROM users WHERE email = ? LIMIT 1');
         mysqli_stmt_bind_param($statement, 's', $email);
         mysqli_stmt_execute($statement);
         $result = mysqli_stmt_get_result($statement);
@@ -29,7 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_regenerate_id(true);
             unset($user['password_hash']);
             $_SESSION['user'] = $user;
-            header('Location: /fix-and-exchange/src/account/home.php');
+            $destination = $user['role'] === 'Admin'
+                ? '/fix-and-exchange/src/admin/dashboard.php'
+                : '/fix-and-exchange/src/account/home.php';
+            header('Location: ' . $destination);
             exit;
         }
     }
