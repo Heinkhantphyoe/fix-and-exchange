@@ -158,7 +158,220 @@ hr {
     width: 33.333%;
 }
 
-/* Navigation. Links stay visible and wrap on small screens. */
+/* Site header and navigation. */
+.site-header {
+    position: relative;
+    z-index: 100;
+    background-color: #115e39;
+    color: #ffffff;
+}
+
+.header-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 12px 16px;
+}
+
+.site-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.site-logo img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.main-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 4px;
+}
+
+.menu-toggle {
+    display: none !important;
+    padding: 8px 12px;
+    color: #ffffff;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 4px;
+}
+
+.menu-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.main-navigation a {
+    padding: 8px 10px;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.main-navigation a:hover,
+.main-navigation a:focus {
+    background-color: #0c4a2c;
+}
+
+.page-content {
+    min-height: 60vh;
+}
+
+/* Keep the hamburger hidden while there is enough room for the full menu. */
+@media (min-width: 701px) {
+    .menu-toggle {
+        display: none !important;
+    }
+
+    .main-navigation {
+        display: flex !important;
+    }
+}
+
+/* Login and signup wireframes. */
+.auth-section {
+    display: flex;
+    justify-content: center;
+    padding: 48px 16px;
+}
+
+.auth-layout {
+    display: grid;
+    grid-template-columns: minmax(320px, 440px) minmax(320px, 560px);
+    width: 100%;
+    max-width: 1000px;
+    min-height: 610px;
+    overflow: hidden;
+    background-color: #ffffff;
+    border: 1px solid #d6e3da;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(31, 42, 36, 0.12);
+}
+
+.auth-card {
+    width: 100%;
+    padding: 32px;
+    background-color: #ffffff;
+    align-self: center;
+}
+
+.auth-card h1 {
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.auth-brand {
+    color: #115e39;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.auth-subtitle {
+    margin-bottom: 28px;
+    color: #17794a;
+    text-align: center;
+}
+
+.auth-card h1 + p {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.forgot-link {
+    margin: -4px 0 16px;
+    text-align: right;
+    font-size: 14px;
+}
+
+.auth-link {
+    margin: 24px 0 0;
+    text-align: center;
+}
+
+.auth-image-panel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 610px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #d9f0df, #b8e1ec);
+}
+
+.auth-image-panel::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(17, 94, 57, 0.05), rgba(17, 94, 57, 0.5));
+    content: "";
+}
+
+.auth-image-panel img {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 24px;
+    /* opacity: 0.5; */
+}
+
+.auth-image-content {
+    position: absolute;
+    z-index: 2;
+    right: 32px;
+    bottom: 32px;
+    left: 32px;
+    color: #ffffff;
+}
+
+.auth-image-kicker {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+    background-color: rgba(17, 94, 57, 0.78);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.auth-image-content h2 {
+    max-width: 390px;
+    margin: 0 0 8px;
+    color: #ffffff;
+    font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.1;
+}
+
+.auth-image-content p {
+    max-width: 410px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.94);
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+/* Older navigation utility classes. */
 .navbar {
     padding: 16px 0;
     background-color: #115e39;
@@ -615,7 +828,7 @@ td {
 }
 
 /* Phones */
-@media (max-width: 600px) {
+@media (max-width: 700px) {
     h1 {
         font-size: 26px;
     }
@@ -647,6 +860,75 @@ td {
     .navbar-inner {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .header-container {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 10px 16px;
+    }
+
+    .site-logo {
+        min-width: 0;
+        justify-content: flex-start;
+    }
+
+    .site-logo span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .main-navigation {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        display: flex;
+        justify-content: stretch;
+        max-height: 0;
+        overflow: hidden;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-8px);
+        background-color: #115e39;
+        box-shadow: 0 6px 12px rgba(31, 42, 36, 0.2);
+        transition: opacity 180ms ease, transform 180ms ease, max-height 220ms ease, visibility 0s linear 220ms;
+    }
+
+    .menu-toggle {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+    }
+
+    .main-navigation.is-open {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        max-height: 80vh;
+        padding-top: 4px;
+        padding-bottom: 8px;
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        transition: opacity 180ms ease, transform 180ms ease, max-height 220ms ease;
+    }
+
+    .main-navigation.is-open a {
+        text-align: center;
+    }
+
+    .auth-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-image-panel {
+        min-height: 300px;
     }
 
     .navbar-menu {

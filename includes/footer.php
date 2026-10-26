@@ -3,3 +3,7 @@
 ?>
 
 <script src="/fix-and-exchange/assets/js/main.js"></script>
+
+</main>
+</body>
+</html>
