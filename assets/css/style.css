@@ -1676,3 +1676,415 @@ td {
         padding: 24px 0;
     }
 }
+
+/* Buyer/seller layouts. Shared colours, forms and buttons are defined above. */
+.bs-page {
+    overflow-wrap: anywhere;
+}
+
+.bs-page img {
+    display: block;
+}
+
+.bs-page .card {
+    padding: 24px;
+}
+.bs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #d6e3da;
+}
+.bs-nav a, .bs-tabs a {
+    display: inline-block;
+    padding: 10px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+}
+.bs-nav .bs-active, .bs-tabs .bs-active {
+    color: #ffffff;
+    background-color: #17794a;
+}
+.bs-marketplace {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    align-items: start;
+    gap: 24px;
+}
+.bs-filters h2 {
+    font-size: 22px;
+}
+.bs-filters .form-group {
+    margin-bottom: 26px;
+}
+.bs-reset {
+    display: block;
+    margin-top: 12px;
+    text-align: center;
+}
+.bs-search-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.bs-search-row input {
+    min-width: 100px;
+    flex: 1;
+}
+.bs-search-row label {
+    white-space: nowrap;
+}
+.bs-search-row select {
+    width: 150px;
+}
+.bs-listing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+.bs-listing-card {
+    margin-bottom: 0;
+}
+.bs-listing-card h2 {
+    margin: 16px 0 8px;
+    font-size: 21px;
+    overflow-wrap: anywhere;
+}
+.bs-listing-card p {
+    margin-bottom: 12px;
+}
+.bs-card-photo {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.bs-no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5d6b63;
+    background-color: #e8f0eb;
+    border: 1px solid #d6e3da;
+    text-align: center;
+}
+.bs-details-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 32px;
+    margin-top: 20px;
+}
+.bs-main-photo {
+    width: 100%;
+    height: 350px;
+    object-fit: contain;
+    background-color: #ffffff;
+    border: 1px solid #d6e3da;
+}
+.bs-photo-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 14px;
+}
+.bs-thumbnail {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.bs-thumbnail-button {
+    padding: 0;
+    border: 2px solid #b5c7bb;
+    border-radius: 6px;
+    background-color: #ffffff;
+}
+.bs-thumbnail-button:focus {
+    outline: 2px solid #17794a;
+}
+.bs-thumbnail-button img {
+    display: block;
+}
+.bs-existing-photo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+}
+/* The wireframe shows a larger first photo on the listing form. */
+.bs-photo-form .bs-photo-previews {
+    align-items: flex-end;
+}
+.bs-photo-form #bs-new-photos img:first-child,
+.bs-photo-form .bs-existing-photo:first-child .bs-thumbnail {
+    width: 170px;
+    height: 110px;
+}
+.bs-listing-form {
+    max-width: 720px;
+    margin: 20px auto;
+}
+.bs-listing-form .form-group {
+    margin-bottom: 26px;
+}
+.bs-type-fieldset {
+    margin: 0 0 20px;
+    padding: 0;
+    border: 0;
+}
+.bs-type-fieldset legend {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+.bs-type-fieldset label {
+    display: inline-block;
+    margin-right: 16px;
+}
+.bs-form-actions {
+    justify-content: flex-end;
+}
+.bs-heading-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.bs-heading-row h1 {
+    margin: 0;
+}
+.bs-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #d6e3da;
+}
+.bs-tabs a {
+    border: 1px solid #d6e3da;
+}
+.bs-table-photo {
+    width: 65px;
+    height: 65px;
+    min-width: 65px;
+    object-fit: cover;
+    font-size: 12px;
+}
+.bs-listings-table {
+    min-width: 850px;
+}
+.bs-inline-form {
+    display: inline;
+    margin: 0;
+}
+.bs-requested-item {
+    margin: 20px 0 28px;
+}
+.bs-offer-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+.bs-offer-photo {
+    width: 150px;
+    height: 140px;
+    min-width: 150px;
+    object-fit: cover;
+}
+.bs-offer-content {
+    flex: 1;
+    min-width: 0;
+}
+.bs-offer-content h2 {
+    margin-bottom: 8px;
+    font-size: 21px;
+    overflow-wrap: anywhere;
+}
+.bs-offer-content p {
+    margin-bottom: 12px;
+}
+.bs-offer-detail {
+    padding: 12px;
+    margin-bottom: 12px;
+    background-color: #f5faf7;
+    border: 1px solid #d6e3da;
+}
+.bs-short-input {
+    max-width: 480px;
+}
+.bs-text {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+.bs-back {
+    margin-top: 48px;
+}
+.bs-report-link {
+    margin-top: 20px;
+    font-size: 14px;
+}
+.bs-messages-layout {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    min-height: 550px;
+    border: 1px solid #d6e3da;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+.bs-conversations {
+    padding: 20px;
+    border-right: 1px solid #d6e3da;
+    background-color: #f5faf7;
+}
+.bs-conversations h2 {
+    font-size: 22px;
+}
+.bs-conversation {
+    display: block;
+    margin-bottom: 10px;
+    padding: 14px;
+    color: #1f2a24;
+    text-decoration: none;
+    border-radius: 6px;
+    overflow-wrap: anywhere;
+}
+.bs-conversation strong, .bs-conversation span, .bs-conversation small {
+    display: block;
+}
+.bs-selected-conversation, .bs-conversation:hover {
+    background-color: #dceee3;
+}
+.bs-chat {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.bs-chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    border-bottom: 1px solid #d6e3da;
+}
+.bs-chat-header h2 {
+    font-size: 20px;
+    margin: 0;
+}
+.bs-chat-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 60%;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+.bs-chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    padding: 24px;
+    max-height: 520px;
+    overflow-y: auto;
+}
+.bs-message {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 10px;
+}
+.bs-message p {
+    margin: 0;
+}
+.bs-message time {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #5d6b63;
+}
+.bs-message-sent {
+    align-self: flex-end;
+    background-color: #dceee3;
+}
+.bs-message-received {
+    align-self: flex-start;
+    background-color: #edf0ee;
+}
+.bs-chat-composer {
+    padding: 20px;
+    border-top: 1px solid #d6e3da;
+}
+.bs-chat-composer form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.bs-chat-composer textarea {
+    flex: 1;
+    resize: vertical;
+}
+@media (max-width: 900px) {
+    .bs-marketplace {
+        grid-template-columns: 210px minmax(0, 1fr);
+        gap: 16px;
+    }
+    .bs-search-row {
+        flex-wrap: wrap;
+    }
+    .bs-search-row input {
+        flex-basis: 100%;
+    }
+    .bs-page .card {
+        padding: 16px;
+    }
+    .bs-messages-layout {
+        grid-template-columns: 220px minmax(0, 1fr);
+    }
+}
+@media (max-width: 700px) {
+    .bs-marketplace, .bs-details-grid, .bs-messages-layout {
+        grid-template-columns: 1fr;
+    }
+    .bs-listing-grid {
+        grid-template-columns: 1fr;
+    }
+    .bs-heading-row, .bs-chat-header {
+        flex-wrap: wrap;
+    }
+    .bs-offer-row {
+        gap: 14px;
+    }
+    .bs-offer-photo {
+        width: 90px;
+        height: 90px;
+        min-width: 90px;
+    }
+    .bs-main-photo {
+        height: 280px;
+    }
+    .bs-conversations {
+        max-height: 230px;
+        overflow-y: auto;
+        border-right: 0;
+        border-bottom: 1px solid #d6e3da;
+    }
+    .bs-chat-item {
+        max-width: 100%;
+    }
+    .bs-chat-messages {
+        min-height: 260px;
+        padding: 16px;
+    }
+    .bs-chat-composer form {
+        align-items: stretch;
+        flex-direction: column;
+    }
+    .bs-nav a, .bs-tabs a {
+        padding: 8px 10px;
+    }
+}

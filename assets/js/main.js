@@ -50,3 +50,57 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+// Basic buyer/seller form and photo controls.
+document.addEventListener('DOMContentLoaded', function () {
+    // Show the latest saved messages after a send or page refresh.
+    const messages = document.querySelector('.bs-chat-messages');
+    if (messages) {
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    const photoInput = document.getElementById('photos');
+    const previews = document.getElementById('bs-new-photos');
+    if (photoInput && previews) {
+        let previewUrls = [];
+        photoInput.addEventListener('change', function () {
+            previewUrls.forEach(function (url) { URL.revokeObjectURL(url); });
+            previewUrls = [];
+            previews.replaceChildren();
+            Array.from(photoInput.files).forEach(function (file) {
+                if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) return;
+                const picture = document.createElement('img');
+                const url = URL.createObjectURL(file);
+                previewUrls.push(url);
+                picture.src = url;
+                picture.alt = 'New photo preview';
+                picture.className = 'bs-thumbnail';
+                previews.appendChild(picture);
+            });
+        });
+    }
+    const price = document.querySelector('.bs-photo-form #price');
+    if (price) {
+        function updatePrice() {
+            const type = document.querySelector('.bs-photo-form input[name="listing_type"]:checked');
+            const sale = type && type.value === 'Sale';
+            price.disabled = !sale;
+            price.required = Boolean(sale);
+        }
+        document.querySelectorAll('.bs-photo-form input[name="listing_type"]').forEach(function (radio) {
+            radio.addEventListener('change', updatePrice);
+        });
+        updatePrice();
+    }
+    document.querySelectorAll('[data-listing-photo]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            const mainPhoto = document.querySelector('img.bs-main-photo');
+            if (mainPhoto) mainPhoto.src = button.dataset.listingPhoto;
+        });
+    });
+    document.querySelectorAll('.bs-page form[data-confirm]').forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!window.confirm(form.dataset.confirm)) event.preventDefault();
+        });
+    });
+});

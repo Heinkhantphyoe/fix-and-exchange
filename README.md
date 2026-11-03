@@ -2,9 +2,9 @@
 
 A school project using PHP, HTML, external CSS, JavaScript, and MySQL.
 
-This is a starter structure. The shared stylesheet, database connection file, and SQL table definitions are prepared. The role CSS files contain comments only, and `main.js` is empty. Most PHP files contain purpose comments only, so the website pages are still blank. Login, access checks, forms, and saving records are not implemented yet.
+The Buyer/Seller pages now support marketplace filters, listings and photos, offers, listing messages, and reports. Login, registration, the student dashboard, and the shared layout use the existing team code. Most admin, repair, profile, and sustainability pages are still placeholders.
 
-The script link is in `includes/footer.php`. Pages still need to include the shared header and footer. The CSS link has not been added yet. The script link currently assumes the project is served at `/fix-and-exchange/`.
+Buyer/Seller layouts follow the seven images in `../output/ERD-matched-wireframes/`, using the existing shared green style in `assets/css/style.css`. The existing shared header includes Font Awesome; no new packages or external services were added for Buyer/Seller.
 
 ## Folders and team responsibilities
 
@@ -16,12 +16,12 @@ The script link is in `includes/footer.php`. Pages still need to include the sha
 | `src/repair-volunteer/` | Repair volunteer member: applications, available jobs, and repair progress. |
 | `src/auth/` | Shared registration, login, and logout. |
 | `src/account/` | Shared campus homepage, search, and profiles. |
-| `src/messages/` | Shared conversations for listings and repairs. |
+| `src/messages/` | Working listing conversations; repair messaging remains for the repair member. |
 | `src/sustainability/` | Shared dashboard, activity, points, and leaderboard. |
-| `includes/` | Reused header, footer, navigation, and future access checks. |
+| `includes/` | Shared header, footer, access checks, and small Buyer/Seller helpers. |
 | `config/` | Shared MySQL connection settings. |
 | `assets/css/` | Shared styles in `style.css`, with a separate CSS file for each main part. |
-| `assets/js/` | Empty `main.js` file for JavaScript features to add later. |
+| `assets/js/` | Shared navigation and basic Buyer/Seller photo and form controls. |
 | `assets/images/` | Website images such as the logo. |
 | `uploads/listings/` | User-uploaded listing images. |
 | `uploads/repairs/` | User-uploaded repair images. |
@@ -29,15 +29,28 @@ The script link is in `includes/footer.php`. Pages still need to include the sha
 
 Agree within the group who will handle each shared part. Use one copy of shared pages instead of duplicating them in each role folder.
 
-## Where to begin
+## Run locally
 
-1. Compare `database/fix-and-exchange.sql` with the ERD and data dictionary. The SQL uses `VARCHAR` for status and type fields; the current data dictionary still lists `ENUM`. Update the documents to match the final SQL before submission.
-2. Check the connection settings in `config/database.php` and set up the database. `IF NOT EXISTS` does not update tables that already exist. The revised SQL was tested in a separate temporary database; it has not been applied to your existing database.
-3. Add the shared page layout, external CSS link, and footer include. Check the CSS and JavaScript paths from the homepage and the role pages.
-4. Build registration, login, and the checks in `includes/auth-check.php`, then build each member's pages.
-5. Connect shared messaging and sustainability pages to the main parts.
+1. Start your local MySQL server. Check `config/database.php` for the connection settings.
+2. For a fresh database, import `database/fix-and-exchange.sql`. For an existing database, inspect its columns first: `IF NOT EXISTS` does not update old tables. The optional `update-user-profile-fields.sql` adds the two missing profile columns used by login; run it only if both are missing. `update-listing-price.sql` allows a NULL price for Exchange listings. These updates were applied to the older local database during testing.
+3. Run `database/seed-categories.sql` if categories are empty. Running it again leaves existing categories unchanged.
+4. From the parent RWDD folder, run `php -d upload_max_filesize=5M -d post_max_size=20M -S 127.0.0.1:8080 -t .` and open `http://127.0.0.1:8080/fix-and-exchange/`. If using Apache/MAMP, serve the project at `/fix-and-exchange/` and set the same upload limits in PHP settings.
+5. Register a student account and sign in. Use two student accounts to try selling and buying. PHP needs MySQLi, mysqlnd, mbstring, and fileinfo, which are available in the tested local PHP installation.
 
-The root `index.php` is the website entry page. Decide its page content when building the homepage.
+## Buyer/Seller flow
+
+- Create a Sale, Exchange, or Giveaway listing. Photos are optional, with up to three JPEG/PNG/WebP images, each at most 5 MB. Use Edit to change an available listing and delete or add photos.
+- Buyers search available items, open details, create the matching offer type, and contact the seller through Messages. Trade offers require an item description; there is no online payment.
+- Sellers accept or reject Incoming Offers. Buyers can cancel Pending offers under Sent Offers. Accepting one offer rejects the other pending offers and prevents further offers for that listing.
+- After agreeing through Messages, the seller uses My Listings to mark the listing Pending, then Completed after handover. Accepted agreements cannot be edited. Reject pending offers before changing a listing's type or price.
+- Remove changes an active listing to Removed and cancels unfinished offers. It keeps history. Completed and Removed listings are read-only. Existing conversation participants can still read and send messages.
+- Listing reports are saved for admin review. No points are awarded by this part; the sustainability member owns those rules.
+
+## Validation
+
+Live local checks passed for all three listing types, image upload/deletion, offer acceptance/rejection/cancellation, handover completion, removal history, messages, reports, filters, and ownership checks. Two PHP workers tested competing offer acceptance: exactly one offer was accepted. A temporary database failure test confirmed that failed image saves roll back the listing and remove uploaded files. The temporary trigger was removed afterward.
+
+PHP syntax and JavaScript syntax checks passed. Screenshots and check results are in `../output/Buyer-Seller-Validation/`. Shared login, dashboard, landing page, and volunteer application were checked. Disposable test accounts and records are removed after validation.
 
 ## Simple coding rules
 
@@ -56,6 +69,6 @@ The root `index.php` is the website entry page. Decide its page content when bui
 
 Current reference files are in the parent RWDD folder: `proposal.docx`, `RWDD Documentation.pdf`, `Buyer-Seller-Data-Dictionary.docx`, and `AAPP012-4-2-RWDD Group Assignment.pdf`. The structure includes all four main roles, shared messaging, sustainability tracking, and buy, trade, and giveaway offers.
 
-The assignment requires working JavaScript features. The empty JavaScript file is only a placeholder. Record external assistance under “References / Tools Used,” and make sure each group member can explain their final code.
+The assignment requires working JavaScript features; basic photo previews, thumbnail selection, price fields, and shared navigation are implemented. Record external assistance under “References / Tools Used,” and make sure each group member can explain their final code.
 
 Existing documents, diagrams, scripts, and the `output/` folder remain in their original locations.
