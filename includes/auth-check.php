@@ -46,6 +46,7 @@ function require_approved_volunteer(): void
     require_student();
 
     require_once __DIR__ . '/../config/database.php';
+    global $conn;
 
     $userId = (int) current_user()['user_id'];
     $statement = mysqli_prepare(
