@@ -1,0 +1,3 @@
+# Keep the upload folder, but do not commit students' uploaded photos.
+*
+!.gitignore

@@ -83,3 +83,11 @@ function get_flash(): ?array
 
     return $flash;
 }
+
+if (!function_exists('escape_html')) {
+    function escape_html($text): string
+    {
+        return htmlspecialchars((string) $text, ENT_QUOTES, 'UTF-8');
+    }
+}
+

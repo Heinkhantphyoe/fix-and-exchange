@@ -3,6 +3,7 @@ require __DIR__ . '/../../config/database.php';
 require __DIR__ . '/../../includes/auth-check.php';
 require_student();
 require __DIR__ . '/../../includes/buyer-seller.php';
+require_once __DIR__ . '/../../includes/sustainability-helpers.php';
 
 $user = current_user();
 $userId = (int) $user['user_id'];
@@ -63,6 +64,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 mysqli_stmt_bind_param($statement, 'i', $listingId);
                 mysqli_stmt_execute($statement);
                 mysqli_stmt_close($statement);
+
+                // Award sustainability eco-points for completed handover
+                $offerStmt = mysqli_prepare($conn, "SELECT offer_id, buyer_id FROM exchange_offers WHERE listing_id = ? AND status = 'Accepted' LIMIT 1");
+                mysqli_stmt_bind_param($offerStmt, 'i', $listingId);
+                mysqli_stmt_execute($offerStmt);
+                $acceptedOffer = mysqli_fetch_assoc(mysqli_stmt_get_result($offerStmt));
+                mysqli_stmt_close($offerStmt);
+
+                if ($acceptedOffer) {
+                    $offerId = (int) $acceptedOffer['offer_id'];
+                    $buyerId = (int) $acceptedOffer['buyer_id'];
+                    $type = $listing['listing_type'];
+                    $sellerPoints = match ($type) {
+                        'Giveaway' => 20,
+                        'Exchange' => 15,
+                        default => 10,
+                    };
+                    award_sustainability_points($conn, $userId, $sellerPoints, $type, $offerId);
+                    award_sustainability_points($conn, $buyerId, 10, $type, $offerId);
+                }
             }
             mysqli_commit($conn);
         }

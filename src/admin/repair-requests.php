@@ -1,4 +1,3 @@
 <?php
-// Monitor repair requests and volunteer progress.
-require __DIR__ . '/../../includes/auth-check.php';
-require_admin();
+// Admin Repair Requests alias
+require __DIR__ . '/adminRepairs.php';

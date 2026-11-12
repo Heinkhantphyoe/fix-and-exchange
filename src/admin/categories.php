@@ -1,4 +1,3 @@
 <?php
-// Manage listing and repair categories.
-require __DIR__ . '/../../includes/auth-check.php';
-require_admin();
+// Admin Categories alias
+require __DIR__ . '/adminCategories.php';

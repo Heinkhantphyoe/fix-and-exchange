@@ -23,7 +23,14 @@ $navActive = static function (string $path) use ($currentPath): bool {
     <link rel="stylesheet" href="/fix-and-exchange/assets/css/style.css">
     <?php if (strpos($currentPath, '/fix-and-exchange/src/repair-volunteer/') === 0): ?>
         <link rel="stylesheet" href="/fix-and-exchange/assets/css/repair-volunteer.css">
+    <?php elseif (strpos($currentPath, '/fix-and-exchange/src/repair-requester/') === 0): ?>
+        <link rel="stylesheet" href="/fix-and-exchange/assets/css/repair-requester.css">
+    <?php elseif (strpos($currentPath, '/fix-and-exchange/src/sustainability/') === 0): ?>
+        <link rel="stylesheet" href="/fix-and-exchange/assets/css/sustainability.css">
+    <?php elseif (strpos($currentPath, '/fix-and-exchange/src/account/') === 0): ?>
+        <link rel="stylesheet" href="/fix-and-exchange/assets/css/account.css">
     <?php endif; ?>
+    <script src="/fix-and-exchange/assets/js/main.js?v=2" defer></script>
 </head>
 <body>
     <header class="site-header">
@@ -33,33 +40,49 @@ $navActive = static function (string $path) use ($currentPath): bool {
                 <span>Fix &amp; Exchange</span>
             </a>
 
-            <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-controls="main-navigation" aria-expanded="false">
-                <span class="menu-icon" aria-hidden="true">&#9776;</span>
-            </button>
-
             <nav class="main-navigation" id="main-navigation" aria-label="Main navigation">
-                <a class="<?= $navActive('/fix-and-exchange/') ? 'is-active' : '' ?>" href="/fix-and-exchange/"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a>
+                <a class="<?= ($navActive('/fix-and-exchange/') && strpos($currentPath, '/fix-and-exchange/src/') !== 0) ? 'is-active' : '' ?>" href="/fix-and-exchange/"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a>
+                <?php if ($isLoggedIn): ?>
+                    <a class="<?= $navActive('/fix-and-exchange/src/account/home.php') ? 'is-active' : '' ?>" href="/fix-and-exchange/src/account/home.php"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i> Dashboard</a>
+                <?php endif; ?>
                 <a class="<?= $navActive('/fix-and-exchange/src/buyer-seller/') ? 'is-active' : '' ?>" href="/fix-and-exchange/src/buyer-seller/marketplace.php"><i class="fa-solid fa-store" aria-hidden="true"></i> Marketplace</a>
                 <a class="<?= $navActive('/fix-and-exchange/src/repair-requester/') ? 'is-active' : '' ?>" href="/fix-and-exchange/src/repair-requester/repair-hub.php"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> Repair Hub</a>
                 <a class="<?= $navActive('/fix-and-exchange/src/sustainability/') ? 'is-active' : '' ?>" href="/fix-and-exchange/src/sustainability/dashboard.php"><i class="fa-solid fa-leaf" aria-hidden="true"></i> Sustainability</a>
                 <?php if ((current_user()['role'] ?? null) === 'Admin'): ?>
                     <a class="<?= $navActive('/fix-and-exchange/src/admin/') ? 'is-active' : '' ?>" href="/fix-and-exchange/src/admin/dashboard.php"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Admin</a>
                 <?php endif; ?>
+            </nav>
+
+            <div class="header-actions">
                 <?php if (current_user() !== null): ?>
+                    <?php $headerUser = current_user(); ?>
                     <div class="profile-menu">
-                        <button class="profile-button <?= $navActive('/fix-and-exchange/src/account/profile.php') ? 'is-active' : '' ?>" type="button" aria-label="Open profile menu" aria-expanded="false">
+                        <button class="profile-button <?= $navActive('/fix-and-exchange/src/account/profile.php') ? 'is-active' : '' ?>" type="button" aria-label="Open profile menu" aria-expanded="false" title="<?= escape_html($headerUser['full_name'] ?? 'User') ?>">
                             <i class="fa-solid fa-user" aria-hidden="true"></i>
                         </button>
                         <div class="profile-dropdown">
-                            <a href="/fix-and-exchange/src/account/home.php">Dashboard</a>
-                            <a href="/fix-and-exchange/src/account/profile.php">Profile</a>
-                            <a href="/fix-and-exchange/src/auth/logout.php">Logout</a>
+                            <div class="profile-dropdown-user">
+                                <strong><?= escape_html($headerUser['full_name'] ?? '') ?></strong>
+                                <span><?= escape_html($headerUser['tp_number'] ?? '') ?> &bull; <?= escape_html($headerUser['role'] ?? '') ?></span>
+                            </div>
+                            <hr class="profile-dropdown-divider">
+                            <a href="/fix-and-exchange/src/account/home.php"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i> Dashboard</a>
+                            <a href="/fix-and-exchange/src/account/profile.php"><i class="fa-solid fa-id-badge" aria-hidden="true"></i> My Profile</a>
+                            <a href="/fix-and-exchange/src/sustainability/points.php"><i class="fa-solid fa-leaf" aria-hidden="true"></i> My Eco Points</a>
+                            <hr class="profile-dropdown-divider">
+                            <a class="dropdown-logout" href="/fix-and-exchange/src/auth/logout.php"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Logout</a>
                         </div>
                     </div>
                 <?php else: ?>
-                    <a class="nav-login-button <?= $navActive('/fix-and-exchange/src/auth/login.php') ? 'is-active' : '' ?>" href="/fix-and-exchange/src/auth/login.php">Login</a>
+                    <a class="nav-login-button <?= $navActive('/fix-and-exchange/src/auth/login.php') ? 'is-active' : '' ?>" href="/fix-and-exchange/src/auth/login.php">
+                        <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Login
+                    </a>
                 <?php endif; ?>
-            </nav>
+
+                <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-controls="main-navigation" aria-expanded="false">
+                    <i class="fa-solid fa-bars menu-toggle-icon" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
     </header>
 

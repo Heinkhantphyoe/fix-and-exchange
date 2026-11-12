@@ -1,4 +1,3 @@
 <?php
-// Review and manage item listings.
-require __DIR__ . '/../../includes/auth-check.php';
-require_admin();
+// Admin Listings alias
+require __DIR__ . '/adminListings.php';

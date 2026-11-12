@@ -7,6 +7,7 @@ $user = current_user();
 
 $userId = (int) $user['user_id'];
 
+$volunteerProfile = null;
 $volunteerStatement = mysqli_prepare(
     $conn,
     'SELECT approval_status
@@ -14,11 +15,20 @@ $volunteerStatement = mysqli_prepare(
      WHERE user_id = ?
      LIMIT 1'
 );
-mysqli_stmt_bind_param($volunteerStatement, 'i', $userId);
-mysqli_stmt_execute($volunteerStatement);
-$volunteerProfile = mysqli_fetch_assoc(mysqli_stmt_get_result($volunteerStatement)) ?: null;
-mysqli_stmt_close($volunteerStatement);
+if ($volunteerStatement) {
+    mysqli_stmt_bind_param($volunteerStatement, 'i', $userId);
+    mysqli_stmt_execute($volunteerStatement);
+    $volRes = mysqli_stmt_get_result($volunteerStatement);
+    $volunteerProfile = $volRes ? mysqli_fetch_assoc($volRes) : null;
+    mysqli_stmt_close($volunteerStatement);
+}
 
+$summary = [
+    'total_points' => 0,
+    'listing_count' => 0,
+    'repair_count' => 0,
+    'offer_count' => 0,
+];
 $summaryStatement = mysqli_prepare(
     $conn,
     "SELECT total_points,
@@ -29,41 +39,53 @@ $summaryStatement = mysqli_prepare(
      WHERE user_id = ?
      LIMIT 1"
 );
-mysqli_stmt_bind_param($summaryStatement, 'i', $userId);
-mysqli_stmt_execute($summaryStatement);
-$summary = mysqli_fetch_assoc(mysqli_stmt_get_result($summaryStatement)) ?: [
-    'total_points' => 0,
-    'listing_count' => 0,
-    'repair_count' => 0,
-    'offer_count' => 0,
-];
-mysqli_stmt_close($summaryStatement);
+if ($summaryStatement) {
+    mysqli_stmt_bind_param($summaryStatement, 'i', $userId);
+    mysqli_stmt_execute($summaryStatement);
+    $sumRes = mysqli_stmt_get_result($summaryStatement);
+    if ($sumRes && ($row = mysqli_fetch_assoc($sumRes))) {
+        $summary = $row;
+    }
+    mysqli_stmt_close($summaryStatement);
+}
 
+$recentListings = [];
 $listingStatement = mysqli_prepare(
     $conn,
-    'SELECT title, listing_type, status, created_at
+    'SELECT listing_id, title, listing_type, status, created_at
      FROM item_listings
      WHERE seller_id = ?
      ORDER BY created_at DESC
      LIMIT 3'
 );
-mysqli_stmt_bind_param($listingStatement, 'i', $userId);
-mysqli_stmt_execute($listingStatement);
-$recentListings = mysqli_stmt_get_result($listingStatement)->fetch_all(MYSQLI_ASSOC);
-mysqli_stmt_close($listingStatement);
+if ($listingStatement) {
+    mysqli_stmt_bind_param($listingStatement, 'i', $userId);
+    mysqli_stmt_execute($listingStatement);
+    $listRes = mysqli_stmt_get_result($listingStatement);
+    if ($listRes) {
+        $recentListings = mysqli_fetch_all($listRes, MYSQLI_ASSOC);
+    }
+    mysqli_stmt_close($listingStatement);
+}
 
+$recentRepairs = [];
 $repairStatement = mysqli_prepare(
     $conn,
-    'SELECT title, status, created_at
+    'SELECT request_id, title, status, created_at
      FROM repair_requests
      WHERE requester_id = ?
      ORDER BY created_at DESC
      LIMIT 3'
 );
-mysqli_stmt_bind_param($repairStatement, 'i', $userId);
-mysqli_stmt_execute($repairStatement);
-$recentRepairs = mysqli_stmt_get_result($repairStatement)->fetch_all(MYSQLI_ASSOC);
-mysqli_stmt_close($repairStatement);
+if ($repairStatement) {
+    mysqli_stmt_bind_param($repairStatement, 'i', $userId);
+    mysqli_stmt_execute($repairStatement);
+    $repRes = mysqli_stmt_get_result($repairStatement);
+    if ($repRes) {
+        $recentRepairs = mysqli_fetch_all($repRes, MYSQLI_ASSOC);
+    }
+    mysqli_stmt_close($repairStatement);
+}
 
 require __DIR__ . '/../../includes/header.php';
 ?>
@@ -125,11 +147,11 @@ require __DIR__ . '/../../includes/header.php';
                 <?php else: ?>
                     <div class="dashboard-list">
                         <?php foreach ($recentListings as $listing): ?>
-                            <div class="dashboard-list-row">
+                            <a class="dashboard-list-row" href="/fix-and-exchange/src/buyer-seller/item-details.php?listing_id=<?= (int) $listing['listing_id'] ?>" style="text-decoration: none; color: inherit;">
                                 <span class="dashboard-row-icon"><i class="fa-solid fa-box" aria-hidden="true"></i></span>
                                 <div><strong><?= htmlspecialchars($listing['title'], ENT_QUOTES, 'UTF-8') ?></strong><small><?= htmlspecialchars($listing['listing_type'], ENT_QUOTES, 'UTF-8') ?> &middot; <?= htmlspecialchars($listing['status'], ENT_QUOTES, 'UTF-8') ?></small></div>
                                 <time datetime="<?= htmlspecialchars($listing['created_at'], ENT_QUOTES, 'UTF-8') ?>"><?= date('M j', strtotime($listing['created_at'])) ?></time>
-                            </div>
+                            </a>
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
@@ -145,11 +167,11 @@ require __DIR__ . '/../../includes/header.php';
                 <?php else: ?>
                     <div class="dashboard-list">
                         <?php foreach ($recentRepairs as $repair): ?>
-                            <div class="dashboard-list-row">
+                            <a class="dashboard-list-row" href="/fix-and-exchange/src/repair-requester/request-details.php?request_id=<?= (int) $repair['request_id'] ?>" style="text-decoration: none; color: inherit;">
                                 <span class="dashboard-row-icon repair-row-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></span>
                                 <div><strong><?= htmlspecialchars($repair['title'], ENT_QUOTES, 'UTF-8') ?></strong><small><?= htmlspecialchars($repair['status'], ENT_QUOTES, 'UTF-8') ?></small></div>
                                 <time datetime="<?= htmlspecialchars($repair['created_at'], ENT_QUOTES, 'UTF-8') ?>"><?= date('M j', strtotime($repair['created_at'])) ?></time>
-                            </div>
+                            </a>
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>

@@ -40,7 +40,5 @@ $isLoggedIn = function_exists('current_user') && current_user() !== null;
         </div>
     </footer>
 
-<script src="/fix-and-exchange/assets/js/main.js"></script>
-
 </body>
 </html>

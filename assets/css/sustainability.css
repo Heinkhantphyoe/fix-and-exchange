@@ -1,0 +1,407 @@
+/* Sustainability & Gamification Stylesheet */
+
+/* Sub navigation */
+.sust-subnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #d6e3da;
+}
+
+.sust-subnav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    color: #315246;
+    background: transparent;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.sust-subnav-link:hover {
+    background: #e8f2ec;
+    color: #144930;
+}
+
+.sust-subnav-link.is-active {
+    background: #1c7049;
+    color: #ffffff;
+}
+
+/* Page Header & Hero */
+.sust-hero {
+    background: linear-gradient(135deg, #103825 0%, #1c6843 60%, #2f8c5b 100%);
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 36px 32px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 24px rgba(18, 60, 42, 0.12);
+    position: relative;
+    overflow: hidden;
+}
+
+.sust-hero::after {
+    content: '\f4d8';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 20px;
+    bottom: -20px;
+    font-size: 140px;
+    color: rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+}
+
+.sust-kicker {
+    margin: 0 0 6px;
+    color: #7ce7aa;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.sust-hero h1 {
+    color: #ffffff;
+    font-size: 30px;
+    margin: 4px 0 10px;
+}
+
+.sust-hero p {
+    color: #e2f2e7;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 680px;
+    margin-bottom: 20px;
+}
+
+/* Stat Grid */
+.sust-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.sust-stat-card {
+    background: #ffffff;
+    border: 1px solid #b5c7bb;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 12px rgba(31, 42, 36, 0.04);
+}
+
+.sust-stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.sust-stat-icon.green { background: #dcefe3; color: #165636; }
+.sust-stat-icon.teal { background: #daf3ee; color: #126354; }
+.sust-stat-icon.amber { background: #fef1dd; color: #8f5812; }
+.sust-stat-icon.blue { background: #e0f0fa; color: #155b85; }
+
+.sust-stat-content strong {
+    display: block;
+    color: #123c2a;
+    font-size: 26px;
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+.sust-stat-content span {
+    color: #55695d;
+    font-size: 13px;
+    margin-top: 4px;
+    display: block;
+}
+
+/* Tier Card & Gamification Box */
+.sust-tier-banner {
+    background: #ffffff;
+    border: 1px solid #b5c7bb;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 4px 14px rgba(31, 42, 36, 0.05);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.sust-tier-icon-wrap {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #eef6f1;
+    border: 3px solid #1c7049;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: #1c7049;
+    flex-shrink: 0;
+}
+
+.sust-tier-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.sust-tier-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #123c2a;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sust-tier-tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    background: #dcefe3;
+    color: #145934;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sust-tier-desc {
+    font-size: 13px;
+    color: #55695d;
+    margin: 0 0 12px;
+}
+
+/* Progress bar */
+.sust-progress-wrap {
+    width: 100%;
+}
+
+.sust-progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #63776b;
+    margin-bottom: 6px;
+}
+
+.sust-progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #e4eee7;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.sust-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #248a56 0%, #30b372 100%);
+    border-radius: 5px;
+    transition: width 0.4s ease;
+}
+
+/* Two-column layout */
+.sust-grid-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.2fr);
+    gap: 24px;
+    align-items: start;
+}
+
+/* Activity Source Badges */
+.sust-source-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.sust-source-repair { background: #efe4f7; color: #622587; }
+.sust-source-giveaway { background: #dcefe3; color: #125433; }
+.sust-source-exchange { background: #daf3ee; color: #116152; }
+.sust-source-sale { background: #e0f0fa; color: #13557d; }
+
+.sust-points-awarded {
+    font-weight: 700;
+    color: #1c7049;
+    font-size: 14px;
+}
+
+/* Leaderboard Podium */
+.sust-podium-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr 1fr;
+    gap: 16px;
+    align-items: flex-end;
+    margin-bottom: 32px;
+}
+
+.sust-podium-card {
+    background: #ffffff;
+    border: 1px solid #b5c7bb;
+    border-radius: 12px;
+    padding: 24px 18px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(31, 42, 36, 0.05);
+    position: relative;
+}
+
+.sust-podium-card.first {
+    border-top: 5px solid #eab308;
+    background: linear-gradient(180deg, #fefce8 0%, #ffffff 30%);
+    transform: translateY(-8px);
+}
+
+.sust-podium-card.second {
+    border-top: 5px solid #94a3b8;
+}
+
+.sust-podium-card.third {
+    border-top: 5px solid #d97706;
+}
+
+.sust-podium-medal {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.sust-podium-card.first .sust-podium-medal { background: #eab308; box-shadow: 0 4px 12px rgba(234, 179, 8, 0.35); }
+.sust-podium-card.second .sust-podium-medal { background: #94a3b8; }
+.sust-podium-card.third .sust-podium-medal { background: #d97706; }
+
+.sust-podium-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #123c2a;
+    margin: 0 0 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sust-podium-program {
+    font-size: 12px;
+    color: #63776b;
+    margin: 0 0 10px;
+}
+
+.sust-podium-points {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1c7049;
+    display: block;
+}
+
+.sust-podium-label {
+    font-size: 11px;
+    color: #55695d;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* User Rank Callout */
+.sust-user-rank-banner {
+    background: #edf7f0;
+    border: 1px solid #b7ddc4;
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #123c2a;
+}
+
+.sust-user-rank-banner strong {
+    color: #145934;
+    font-size: 16px;
+}
+
+/* Points Breakdown Bar Chart */
+.sust-breakdown-row {
+    margin-bottom: 14px;
+}
+
+.sust-breakdown-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #27372e;
+    margin-bottom: 4px;
+}
+
+.sust-breakdown-bar {
+    width: 100%;
+    height: 8px;
+    background: #eef4f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.sust-breakdown-fill {
+    height: 100%;
+    border-radius: 4px;
+}
+
+.sust-breakdown-fill.repair { background: #8e44ad; }
+.sust-breakdown-fill.giveaway { background: #27ae60; }
+.sust-breakdown-fill.exchange { background: #16a085; }
+.sust-breakdown-fill.sale { background: #2980b9; }
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .sust-stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .sust-grid-layout {
+        grid-template-columns: 1fr;
+    }
+    .sust-podium-grid {
+        grid-template-columns: 1fr;
+        align-items: stretch;
+    }
+    .sust-podium-card.first {
+        transform: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .sust-stat-grid {
+        grid-template-columns: 1fr;
+    }
+    .sust-tier-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+}
