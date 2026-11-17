@@ -1,11 +1,12 @@
 <?php
 require __DIR__ . '/../../config/database.php';
 require __DIR__ . '/../../includes/auth-check.php';
-require_student();
+require_login();
 require __DIR__ . '/../../includes/buyer-seller.php';
 
 $user = current_user();
-$userId = (int) $user['user_id'];
+$userId = (int) ($user['user_id'] ?? 0);
+$isAdmin = ($user['role'] ?? '') === 'Admin';
 
 // Load the item and check who can view it.
 $listingId = (int) ($_GET['listing_id'] ?? 0);
@@ -21,7 +22,7 @@ mysqli_stmt_execute($statement);
 $accepted = mysqli_fetch_assoc(mysqli_stmt_get_result($statement));
 mysqli_stmt_close($statement);
 
-if ($listing['status'] === 'Removed' && !$owner) {
+if ($listing['status'] === 'Removed' && !$owner && !$isAdmin) {
     $statement = mysqli_prepare(
         $conn,
         'SELECT offer_id FROM exchange_offers
@@ -55,7 +56,12 @@ require __DIR__ . '/../../includes/header.php';
 <section class="section bs-page">
     <div class="container">
         <?php show_buyer_seller_nav(); ?>
-        <p><a href="marketplace.php">Marketplace</a> &gt; Item Details</p>
+        <p>
+            <?php if ($isAdmin): ?>
+                <a href="/fix-and-exchange/src/admin/adminListings.php">Admin Listings</a> &gt;
+            <?php endif; ?>
+            <a href="marketplace.php">Marketplace</a> &gt; Item Details
+        </p>
         <h1><?= escape_html($listing['title']) ?></h1>
         <div class="bs-details-grid">
             <div>
@@ -74,7 +80,14 @@ require __DIR__ . '/../../includes/header.php';
                 <p><strong>Status:</strong> <?= escape_html($listing['status']) ?></p>
                 <p><strong>Seller:</strong> <?= escape_html($listing['seller_name']) ?></p>
                 <div class="btn-group">
-                    <?php if ($owner): ?>
+                    <?php if ($isAdmin): ?>
+                        <a class="btn btn-primary" href="/fix-and-exchange/src/admin/adminListingDetails.php?listing_id=<?= $listingId ?>">
+                            <i class="fa-solid fa-shield-halved"></i> Open in Admin Details Page
+                        </a>
+                        <a class="btn btn-outline-primary" href="/fix-and-exchange/src/admin/adminListings.php">
+                            <i class="fa-solid fa-arrow-left"></i> Back to Admin Listings
+                        </a>
+                    <?php elseif ($owner): ?>
                         <a class="btn btn-primary" href="my-listings.php">Manage Listing</a>
                     <?php elseif ($listing['status'] !== 'Removed'): ?>
                         <?php if ($listing['status'] === 'Available' && !$accepted): ?>
@@ -83,7 +96,7 @@ require __DIR__ . '/../../includes/header.php';
                         <a class="btn btn-outline-primary" href="../messages/index.php?listing_id=<?= $listingId ?>">Message Seller</a>
                     <?php endif; ?>
                 </div>
-                <?php if (!$owner && $listing['status'] !== 'Removed'): ?>
+                <?php if (!$owner && !$isAdmin && $listing['status'] !== 'Removed'): ?>
                     <p class="bs-report-link"><a href="report-listing.php?listing_id=<?= $listingId ?>">Report Listing</a></p>
                 <?php endif; ?>
             </div>
@@ -91,7 +104,12 @@ require __DIR__ . '/../../includes/header.php';
         <hr>
         <h2>Description</h2>
         <p class="bs-text"><?= escape_html($listing['description']) ?></p>
-        <p class="bs-back"><a href="marketplace.php">&lt; Back to Marketplace</a></p>
+        <p class="bs-back">
+            <?php if ($isAdmin): ?>
+                <a href="/fix-and-exchange/src/admin/adminListings.php?listing=<?= $listingId ?>#listingDetails">&lt; Back to Admin Review</a> &bull;
+            <?php endif; ?>
+            <a href="marketplace.php">&lt; Back to Marketplace</a>
+        </p>
     </div>
 </section>
 <?php require __DIR__ . '/../../includes/footer.php'; ?>

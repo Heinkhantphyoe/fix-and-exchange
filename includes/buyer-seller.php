@@ -146,12 +146,20 @@ function show_buyer_seller_nav()
         $section = 'my-offers';
     }
 
-    $links = [
-        'marketplace' => ['Marketplace', '/fix-and-exchange/src/buyer-seller/marketplace.php'],
-        'my-listings' => ['My Listings', '/fix-and-exchange/src/buyer-seller/my-listings.php'],
-        'my-offers' => ['Offers', '/fix-and-exchange/src/buyer-seller/my-offers.php'],
-        'messages' => ['Messages', '/fix-and-exchange/src/messages/index.php'],
-    ];
+    if ((current_user()['role'] ?? '') === 'Admin') {
+        $links = [
+            'marketplace' => ['Marketplace', '/fix-and-exchange/src/buyer-seller/marketplace.php'],
+            'admin-listings' => ['Admin Listings', '/fix-and-exchange/src/admin/adminListings.php'],
+            'admin-reports' => ['Admin Reports', '/fix-and-exchange/src/admin/adminReports.php'],
+        ];
+    } else {
+        $links = [
+            'marketplace' => ['Marketplace', '/fix-and-exchange/src/buyer-seller/marketplace.php'],
+            'my-listings' => ['My Listings', '/fix-and-exchange/src/buyer-seller/my-listings.php'],
+            'my-offers' => ['Offers', '/fix-and-exchange/src/buyer-seller/my-offers.php'],
+            'messages' => ['Messages', '/fix-and-exchange/src/messages/index.php'],
+        ];
+    }
     ?>
     <nav class="bs-nav" aria-label="Buyer and seller navigation">
         <?php foreach ($links as $key => $link): ?>

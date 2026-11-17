@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../../config/database.php';
 require __DIR__ . '/../../includes/auth-check.php';
-require_student();
+require_login();
 require __DIR__ . '/../../includes/buyer-seller.php';
 
 $user = current_user();

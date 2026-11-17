@@ -290,9 +290,9 @@ render_admin_header('Listing Management', 'listings');
                         </form>
 
                         <div class="adminDetailSidebarSection" style="margin-top: 20px;">
-                            <h3>Marketplace Public View</h3>
-                            <a class="listingsButton" href="/fix-and-exchange/src/buyer-seller/item-details.php?listing_id=<?= (int) $selectedListing['listing_id'] ?>" target="_blank">
-                                <i class="fa-solid fa-store" aria-hidden="true"></i> View item details
+                            <h3>Full Item View</h3>
+                            <a class="listingsButton" href="adminListingDetails.php?listing_id=<?= (int) $selectedListing['listing_id'] ?>">
+                                <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> View full item details
                             </a>
                         </div>
 
@@ -390,7 +390,7 @@ render_admin_header('Listing Management', 'listings');
                                         <a class="listingsButton" href="<?= escape_html($resultsUrl . '&listing=' . (int) $listing['listing_id']) ?>#listingDetails">
                                             Review
                                         </a>
-                                        <a class="listingsButton" href="/fix-and-exchange/src/buyer-seller/item-details.php?listing_id=<?= (int) $listing['listing_id'] ?>" target="_blank">
+                                        <a class="listingsButton" href="adminListingDetails.php?listing_id=<?= (int) $listing['listing_id'] ?>">
                                             View
                                         </a>
                                     </div>
