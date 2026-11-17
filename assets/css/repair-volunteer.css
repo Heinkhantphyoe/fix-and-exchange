@@ -243,9 +243,15 @@
 .volunteer-job-list { display: grid; gap: 12px; }
 .volunteer-job-row, .volunteer-job-card { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 16px; border: 1px solid #d6e3da; background: #fbfdfb; }
 .volunteer-job-card { align-items: start; }
+.volunteer-job-card-content { display: flex; align-items: flex-start; gap: 18px; flex: 1; }
+.volunteer-job-thumb-wrap { flex-shrink: 0; width: 130px; height: 100px; border-radius: 6px; overflow: hidden; border: 1px solid #b5c7bb; background: #edf4ef; }
+.volunteer-job-thumb { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.2s ease; }
+.volunteer-job-card:hover .volunteer-job-thumb { transform: scale(1.04); }
+.volunteer-job-info { flex: 1; min-width: 0; }
+.volunteer-job-desc { margin-top: 6px !important; line-height: 1.45; }
 .volunteer-job-row h3, .volunteer-job-card h2 { margin: 0 0 5px; color: #123c2a; }
 .volunteer-job-row p, .volunteer-job-card p { margin: 0; color: #52645a; }
-.volunteer-badge { display: inline-block; padding: 4px 9px; border-radius: 12px; color: #155535; background: #dcefe3; font-size: 13px; white-space: nowrap; }
+.volunteer-badge { display: inline-block; padding: 4px 9px; border-radius: 12px; color: #155535; background: #dcefe3; font-size: 13px; white-space: nowrap; margin-bottom: 4px; }
 .volunteer-filters { display: grid; grid-template-columns: 1fr 220px auto; gap: 10px; margin-bottom: 18px; }
 .volunteer-detail { max-width: 900px; }
 .volunteer-description { line-height: 1.6; color: #34483d; }
@@ -264,4 +270,7 @@
     .volunteer-filters { grid-template-columns: 1fr; }
     .volunteer-job-row, .volunteer-job-card { display: block; }
     .volunteer-job-row > * { margin-top: 10px; }
+    .volunteer-job-card > .btn { margin-top: 14px; width: 100%; text-align: center; }
+    .volunteer-job-card-content { flex-direction: column; gap: 12px; }
+    .volunteer-job-thumb-wrap { width: 100%; height: 160px; }
 }

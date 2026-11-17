@@ -248,17 +248,37 @@ INSERT INTO repair_requests (request_id, requester_id, category_id, title, probl
 (5, 8, 2, 'Royal Kludge RK61 Mechanical Keyboard - Stuttering Spacebar', 'Spacebar key registers erratic double spaces or drops input when typing fast. Non-hotswap PCB requires desoldering and soldering a replacement switch.', 'Completed', '2026-10-28 11:00:00'),
 
 -- 6. Cancelled Repair Request (Requester decided to upgrade)
-(6, 6, 2, 'MacBook Pro 13-inch 2017 - Battery Service Warning', 'Battery cycle count exceeds 1100. Discharges from 100% to 0% in under 20 minutes.', 'Cancelled', '2026-10-22 10:00:00');
+(6, 6, 2, 'MacBook Pro 13-inch 2017 - Battery Service Warning', 'Battery cycle count exceeds 1100. Discharges from 100% to 0% in under 20 minutes.', 'Cancelled', '2026-10-22 10:00:00'),
+
+-- 7. Open Repair Request (Laptops & Computing)
+(7, 4, 2, 'Dell Inspiron 15 (5510) - Loose DC Power Jack & Intermittent Charging', 'Barrel charging plug is extremely loose inside the chassis. Battery only charges when the cable is pulled upwards at a tight angle. Requires opening bottom shell and securing or replacing the DC-in harness jack.', 'Open', '2026-11-11 10:15:00'),
+
+-- 8. Verified Repair Request (Dorm Living & Appliances)
+(8, 5, 5, 'Midea 16-inch Dorm Stand Fan - Stiff Motor Shaft & Oscillation Jam', 'Blades barely turn on speed 1 and motor housing gets hot with a humming sound. Dried grease on sleeve bearings. Needs cage removal, rotor shaft cleaning with isopropyl alcohol, and 3-in-1 machine oil lubrication.', 'Verified', '2026-11-11 14:30:00'),
+
+-- 9. Open Repair Request (Audio & Sound)
+(9, 6, 4, 'Apple AirPods (2nd Gen) - Right Earbud Low Volume & Muffled Sound', 'Right earbud audio output is roughly 25% lower than the left one. Bluetooth and microphone work fine. Suspected clogged acoustic mesh screen. Needs precision ultrasonic or Blu-Tack / isopropyl alcohol cleaning.', 'Open', '2026-11-12 09:00:00'),
+
+-- 10. Verified Repair Request (Phones & Tablets)
+(10, 7, 3, 'Apple iPad Air (3rd Gen) - Lightning Port Packed with Lint & Not Syncing', 'Lightning cable will not click all the way in and disconnects with slight movement. Port has compressed pocket lint preventing pin contact. Needs fine non-conductive ESD probe cleaning and contact restoration.', 'Verified', '2026-11-12 11:20:00'),
+
+-- 11. Open Repair Request (Dorm Living & Appliances)
+(11, 4, 5, 'Tefal Mini Dorm Rice Cooker (0.8L) - Cook Switch Springs Back Early', 'The mechanical lever switch clicks from Cook to Warm after just two minutes, leaving rice undercooked. Center magnetic thermostat spring mechanism needs tension adjustment or microswitch contact cleaning.', 'Open', '2026-11-12 16:45:00');
 
 -- ==============================================================================
 -- 8. REPAIR IMAGES
 -- ==============================================================================
 INSERT INTO repair_images (repair_image_id, request_id, image_path) VALUES
 (1, 1, 'assets/images/welcomebanner.jpeg'),
-(2, 2, 'assets/images/apu.jpg'),
-(3, 3, 'assets/images/login.jpg'),
-(4, 4, 'assets/images/welcomebanner.jpeg'),
-(5, 5, 'assets/images/apu.jpg');
+(2, 2, 'assets/images/ipad.jpg'),
+(3, 3, 'assets/images/iron.jpg'),
+(4, 4, 'assets/images/headphones.jpg'),
+(5, 5, 'assets/images/keyboard.jpg'),
+(6, 7, 'assets/images/dell.jpg'),
+(7, 8, 'assets/images/stand-fan.jpg'),
+(8, 9, 'assets/images/airpods.jpg'),
+(9, 10, 'assets/images/ipad.jpg'),
+(10, 11, 'assets/images/rice-cooker.jpg');
 
 -- ==============================================================================
 -- 9. REPAIR ASSIGNMENTS

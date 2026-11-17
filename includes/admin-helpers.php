@@ -57,7 +57,7 @@ function render_admin_header(string $pageTitle, string $activeTab = ''): void
     <link rel="icon" type="image/jpeg" href="/fix-and-exchange/assets/images/logo.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="/fix-and-exchange/assets/css/adminStyles.css">
-    <script src="/fix-and-exchange/assets/js/admin.js?v=2" defer></script>
+    <script src="/fix-and-exchange/assets/js/admin.js?v=3" defer></script>
 </head>
 <body>
     <header class="siteHeader">
