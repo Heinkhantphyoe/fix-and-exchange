@@ -29,6 +29,8 @@ $navActive = static function (string $path) use ($currentPath): bool {
         <link rel="stylesheet" href="/fix-and-exchange/assets/css/sustainability.css">
     <?php elseif (strpos($currentPath, '/fix-and-exchange/src/account/') === 0): ?>
         <link rel="stylesheet" href="/fix-and-exchange/assets/css/account.css">
+    <?php elseif (strpos($currentPath, 'about') !== false): ?>
+        <link rel="stylesheet" href="/fix-and-exchange/assets/css/about.css">
     <?php endif; ?>
     <script src="/fix-and-exchange/assets/js/main.js?v=2" defer></script>
 </head>
@@ -41,13 +43,14 @@ $navActive = static function (string $path) use ($currentPath): bool {
             </a>
 
             <nav class="main-navigation" id="main-navigation" aria-label="Main navigation">
-                <a class="<?= ($navActive('/fix-and-exchange/') && strpos($currentPath, '/fix-and-exchange/src/') !== 0) ? 'is-active' : '' ?>" href="/fix-and-exchange/"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a>
+                <a class="<?= ($navActive('/fix-and-exchange/') && strpos($currentPath, '/fix-and-exchange/src/') !== 0 && strpos($currentPath, 'about') === false) ? 'is-active' : '' ?>" href="/fix-and-exchange/"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a>
                 <?php if ($isLoggedIn): ?>
                     <a class="<?= $navActive('/fix-and-exchange/src/account/home.php') ? 'is-active' : '' ?>" href="/fix-and-exchange/src/account/home.php"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i> Dashboard</a>
                 <?php endif; ?>
                 <a class="<?= $navActive('/fix-and-exchange/src/buyer-seller/') ? 'is-active' : '' ?>" href="/fix-and-exchange/src/buyer-seller/marketplace.php"><i class="fa-solid fa-store" aria-hidden="true"></i> Marketplace</a>
                 <a class="<?= $navActive('/fix-and-exchange/src/repair-requester/') ? 'is-active' : '' ?>" href="/fix-and-exchange/src/repair-requester/repair-hub.php"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> Repair Hub</a>
                 <a class="<?= $navActive('/fix-and-exchange/src/sustainability/') ? 'is-active' : '' ?>" href="/fix-and-exchange/src/sustainability/dashboard.php"><i class="fa-solid fa-leaf" aria-hidden="true"></i> Sustainability</a>
+                <a class="<?= (strpos($currentPath, 'about') !== false) ? 'is-active' : '' ?>" href="/fix-and-exchange/about-us.php"><i class="fa-solid fa-users" aria-hidden="true"></i> About Us</a>
                 <?php if ((current_user()['role'] ?? null) === 'Admin'): ?>
                     <a class="<?= $navActive('/fix-and-exchange/src/admin/') ? 'is-active' : '' ?>" href="/fix-and-exchange/src/admin/dashboard.php"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Admin</a>
                 <?php endif; ?>

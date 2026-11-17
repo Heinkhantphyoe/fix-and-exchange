@@ -15,6 +15,7 @@ $isLoggedIn = function_exists('current_user') && current_user() !== null;
             <div class="footer-column">
                 <h2>Explore</h2>
                 <a href="/fix-and-exchange/">Home</a>
+                <a href="/fix-and-exchange/about-us.php">About Us</a>
                 <a href="/fix-and-exchange/src/buyer-seller/marketplace.php">Marketplace</a>
                 <a href="/fix-and-exchange/src/repair-requester/repair-hub.php">Repair Hub</a>
                 <a href="/fix-and-exchange/src/sustainability/leaderboard.php">Leaderboard</a>
